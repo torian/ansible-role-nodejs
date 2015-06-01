@@ -1,0 +1,11 @@
+---
+
+- include: repository.yml
+  sudo: yes
+  when: node_official_repository
+
+- include: install.yml
+  sudo: yes
+  tags: node_install
+ 
+# vi:ts=2:sw=2:et:ft=yaml
