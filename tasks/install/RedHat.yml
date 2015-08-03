@@ -1,0 +1,13 @@
+---
+
+- name: NodeJS Repository (RedHat)
+  yum:
+    state=present
+    name="{{nodejs_repository}}"
+
+- name: Install NodeJS (RedHat)
+  yum:
+    state=present
+    name=nodejs
+
+# vi:ts=2:sw=2:et:ft=yaml
