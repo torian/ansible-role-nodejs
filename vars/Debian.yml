@@ -1,0 +1,7 @@
+---
+
+nodejs_repository:     "https://deb.nodesource.com/node_{{nodejs_repository_version}}"
+nodejs_repository_key: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+
+# vi:ts=2:sw=2:et:ft=yaml

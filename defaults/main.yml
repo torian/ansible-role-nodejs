@@ -1,9 +1,7 @@
 ---
 
-# Enable official repository
-node_official_repository: true
-
 # Node version to install
-node_version: 2.1.11
+nodejs_version: 2.1.11
+nodejs_repository_version: 0.12
 
 # vi:ts=2:sw=2:et:ft=yaml

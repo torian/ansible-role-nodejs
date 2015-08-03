@@ -1,0 +1,30 @@
+---
+
+- name: Repository key
+  apt_key:
+    state=present
+    url="{{nodejs_repository_key}}"
+  
+- name: NodeJS Repository
+  apt_repository:
+    state=present
+    repo="deb {{nodejs_repository}} {{ansible_distribution_release}} main"
+    update_cache=yes
+
+- name: Install NodeJS (Debian)
+  apt:
+    name=nodejs
+    state=present
+
+- name: Currently installed version
+  command: npm --version
+  register: n_version
+
+- name: Upgrade npm version
+  npm:
+    name=npm
+    global=yes
+    version="{{nodejs_version}}"
+  when: n_version.stdout != nodejs_version
+ 
+# vi:ts=2:sw=2:et:ft=yaml
