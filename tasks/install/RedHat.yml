@@ -8,6 +8,6 @@
 - name: Install NodeJS (RedHat)
   yum:
     state=present
-    name=nodejs
+    name="nodejs-{{nodejs_version}}"
 
 # vi:ts=2:sw=2:et:ft=yaml

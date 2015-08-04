@@ -8,13 +8,13 @@
  
 - name: Currently installed version
   command: npm --version
-  register: n_version
+  register: r_npm_version
 
-- name: Upgrade npm version
+- name: Upgrade NPM version
   npm:
     name=npm
     global=yes
-    version="{{nodejs_version}}"
-  when: n_version.stdout != nodejs_version
+    version="{{nodejs_npm_version}}"
+  when: r_npm_version.stdout != nodejs_npm_version
  
 # vi:ts=2:sw=2:et:ft=yaml
