@@ -28,6 +28,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
   end
 
+  config.vm.define 'centos' do |centos|
+    CENTOS_VM = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'
+    EPEL_REPO = '''
+[epel]
+name     = EPEL 6 - \$basearch
+baseurl  = http://download.fedoraproject.org/pub/epel/6/\$basearch
+enabled  = 1
+gpgcheck = 0
+'''
+
+    centos.vm.box      = CENTOS_VM
+    centos.vm.hostname = 'centos'
+
+    centos.vm.provision 'shell', inline: "echo \"#{EPEL_REPO}\" > /etc/yum.repos.d/epel.repo"
+    centos.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc'
+    centos.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
+    centos.vm.provision 'shell', inline: 'pip install -q ansible jinja2'
+    centos.vm.provision 'shell', inline: 'yum remove -y python-devel'
+
+    centos.vm.provision 'ansible' do |ansible| 
+      ansible.playbook = 'tests/test_vagrant.yml'
+    end
+  end
+
+
 end
   
 # vi:ts=2:sw=2:et:ft=ruby:
