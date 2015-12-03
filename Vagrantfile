@@ -28,30 +28,54 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
   end
 
-  config.vm.define 'centos' do |centos|
-    CENTOS_VM = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'
+  config.vm.define 'centos-6' do |centos|
     EPEL_REPO = '''
 [epel]
 name     = EPEL 6 - \$basearch
-baseurl  = http://download.fedoraproject.org/pub/epel/6/\$basearch
+baseurl  = http://mirror.globo.com/epel/6/\$basearch
 enabled  = 1
 gpgcheck = 0
 '''
 
-    centos.vm.box      = CENTOS_VM
+    centos.vm.box      = "puppetlabs/centos-6.6-64-nocm"
     centos.vm.hostname = 'centos'
 
+    centos.vm.provision 'shell', inline: 'yum install -y ca-certificates'
     centos.vm.provision 'shell', inline: "echo \"#{EPEL_REPO}\" > /etc/yum.repos.d/epel.repo"
     centos.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc'
     centos.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
     centos.vm.provision 'shell', inline: 'pip install -q ansible jinja2'
-    centos.vm.provision 'shell', inline: 'yum remove -y python-devel'
+
+    centos.vm.provision 'ansible' do |ansible| 
+      ansible.playbook   = 'tests/test_vagrant.yml'
+      ansible.extra_vars = {
+        nodejs_version: '0.10'
+      }
+    end
+  end
+
+  config.vm.define 'centos-7' do |centos|
+    EPEL_REPO = '''
+[epel]
+name     = EPEL 7 - \$basearch
+baseurl  = http://mirror.globo.com/epel/7/\$basearch
+enabled  = 1
+gpgcheck = 0
+'''
+
+    centos.vm.box      = 'puppetlabs/centos-7.0-64-nocm'
+    centos.vm.hostname = 'centos'
+
+    centos.vm.provision 'shell', inline: 'yum install -y ca-certificates'
+    centos.vm.provision 'shell', inline: "echo \"#{EPEL_REPO}\" > /etc/yum.repos.d/epel.repo"
+    centos.vm.provision 'shell', inline: 'yum install -y python-pip python-devel gcc'
+    centos.vm.provision 'shell', inline: 'pip install -q pip --upgrade'
+    centos.vm.provision 'shell', inline: 'pip install -q ansible jinja2'
 
     centos.vm.provision 'ansible' do |ansible| 
       ansible.playbook = 'tests/test_vagrant.yml'
     end
   end
-
 
 end
   
