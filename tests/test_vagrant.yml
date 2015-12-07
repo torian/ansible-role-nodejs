@@ -2,7 +2,8 @@
 - hosts: all
   sudo: yes
 
-  #vars:
+  vars:
+    - nodejs_version: '4.2'
 
   roles:
     - {
