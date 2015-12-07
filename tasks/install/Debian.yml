@@ -5,8 +5,6 @@
     state=present
     url="{{nodejs_repository_key}}"
   
-- debug: msg="{{nodejs_v_major}}/{{nodejs_v_minor}}/{{nodejs_v_patch}}"
-
 - name: NodeJS Repository (Debian)
   apt_repository:
     state=present
