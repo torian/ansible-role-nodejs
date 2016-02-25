@@ -12,7 +12,7 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - trusty
-  - name: CentOS
+  - name: Centos
     versions:
     - 6
   - name: Amazon Linux
