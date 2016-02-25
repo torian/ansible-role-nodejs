@@ -9,7 +9,7 @@
 
 - name: Install NodeJS (RedHat)
   yum:
-    state=present
+    state="{{ (nodejs_upgrade) | ternary('latest', 'present') }}"
     update_cache=yes
     name="nodejs"
 

@@ -13,7 +13,7 @@
 
 - name: Install NodeJS (Debian)
   apt:
-    name="nodejs={{nodejs_v_major}}.{{nodejs_v_minor}}*"
-    state=present
+    state="{{ (nodejs_upgrade) | ternary('latest', 'present') }}"
+    name="nodejs"
 
 # vi:ts=2:sw=2:et:ft=yaml
