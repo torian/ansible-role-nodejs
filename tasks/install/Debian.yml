@@ -4,6 +4,7 @@
   apt_key:
     state=present
     url="{{nodejs_repository_key}}"
+    validate_certs=no
   
 - name: NodeJS Repository (Debian)
   apt_repository:
