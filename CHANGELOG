@@ -1,11 +1,19 @@
+# Changelog
 
-0.3.0
+## 2017-03-17:  0.3.1
+
+  - Ansible lint - fixed white spaces
+  - Ansible lint - use become instead of deprecated sudo
+
+## 2016-02-25: 0.3.0
+
   - Documentation
   - NodeJS version defaults to 4.2
   - NPM version defaults to 2.14.7
   - Added CHANGELOG
 
-0.2.2
+## 2015-12-21: 0.2.2
+
   - Documentation
   - Support for RH-like distros
   - Identify repository version from nodejs_version
