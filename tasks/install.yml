@@ -9,6 +9,7 @@
 - name: Currently installed version
   command: npm --version
   register: r_npm_version
+  tags: skip_ansible_lint
 
 - name: Upgrade NPM version
   npm:
