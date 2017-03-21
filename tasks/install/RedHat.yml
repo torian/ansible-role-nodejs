@@ -6,11 +6,12 @@
 - name: NodeJS Repository (RedHat)
   shell: >
     curl --silent --location {{nodejs_setup_url}} | sudo bash -
+  tags: skip_ansible_lint
 
 - name: Install NodeJS (RedHat)
   yum:
-    state="{{ (nodejs_upgrade) | ternary('latest', 'present') }}"
-    update_cache=yes
-    name="nodejs"
+    state: "{{ (nodejs_upgrade) | ternary('latest', 'present') }}"
+    update_cache: yes
+    name: "nodejs"
 
 # vi:ts=2:sw=2:et:ft=yaml
