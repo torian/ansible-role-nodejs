@@ -1,6 +1,6 @@
 ---
 
-nodejs_v_major: "{{nodejs_version|regex_replace('^([0-9]+)\..*$', '\\1')}}"
+nodejs_v_major: "{{nodejs_version|regex_replace('^([0-9]+)\\..*$', '\\1')}}"
 nodejs_v_minor: "{{nodejs_version|regex_replace('^[0-9]+\\.([0-9]+).*$', '\\1')}}"
 nodejs_v_patch: "{{nodejs_version|regex_replace('^[0-9]+\\.[0-9]+\\.([0-9]+)$', '\\1')}}"
 
